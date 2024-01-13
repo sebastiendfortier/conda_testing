@@ -1,2 +1,1 @@
-# conda_testing
-Docker container for testing python-rpn conda packages
+# Docker container for testing python-rpn conda packages
