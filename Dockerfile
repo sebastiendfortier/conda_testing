@@ -211,3 +211,4 @@ RUN . activate tester && \
     python kernel_tester.py --notebooks test_spookipy.ipynb --kernels spookipy-39 spookipy-310 spookipy-311 
 
 ################################################################
+COPY control.ipynb .
