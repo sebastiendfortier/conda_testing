@@ -49,31 +49,31 @@ RUN conda clean -y --all
 
 RUN if [ "$ARCH" != "ppc64le" ]; then \
    echo "Running commands for $ARCH"; \
-   mamba create -q -y -n python-rpn-310 python=3.10 fortiers::eccc_rpnpy ipykernel jupyter;
-   . activate python-rpn-310 && python -m ipykernel install --user --name python-rpn-310 --display-name="python-rpn-310";
-   . activate python-rpn-310 && python test_python-rpn.py || exit 1;
-   conda clean -y --all;
+   mamba create -q -y -n python-rpn-310 python=3.10 fortiers::eccc_rpnpy ipykernel jupyter; \
+   . activate python-rpn-310 && python -m ipykernel install --user --name python-rpn-310 --display-name="python-rpn-310"; \
+   . activate python-rpn-310 && python test_python-rpn.py || exit 1; \
+   conda clean -y --all; \
    fi
 
 RUN if [ "$ARCH" != "ppc64le" ]; then \
    echo "Running commands for $ARCH"; \
-   mamba create -q -y -n python-rpn-311 python=3.11 fortiers::eccc_rpnpy ipykernel jupyter;
-   . activate python-rpn-311 && python -m ipykernel install --user --name python-rpn-311 --display-name="python-rpn-311";
-   . activate python-rpn-311 && python test_python-rpn.py || exit 1;
-   conda clean -y --all;
+   mamba create -q -y -n python-rpn-311 python=3.11 fortiers::eccc_rpnpy ipykernel jupyter; \
+   . activate python-rpn-311 && python -m ipykernel install --user --name python-rpn-311 --display-name="python-rpn-311"; \
+   . activate python-rpn-311 && python test_python-rpn.py || exit 1; \
+   conda clean -y --all; \
    fi
 
 RUN mamba create -q -y -n tester python=3.9 nbformat nbconvert jupyter
 
 RUN if [ "$ARCH" != "ppc64le" ]; then \
    echo "Running commands for $ARCH"; \
-   . activate tester;
-   python kernel_tester.py --notebooks test_python-rpn.ipynb --kernels python-rpn-39 python-rpn-310 python-rpn-311 || exit 1;
-   conda clean -y --all;
-   else;
-   . activate tester;
-   python kernel_tester.py --notebooks test_python-rpn.ipynb --kernels python-rpn-39 || exit 1;
-   conda clean -y --all;
+   . activate tester; \
+   python kernel_tester.py --notebooks test_python-rpn.ipynb --kernels python-rpn-39 python-rpn-310 python-rpn-311 || exit 1; \
+   conda clean -y --all; \
+   else; \
+   . activate tester; \
+   python kernel_tester.py --notebooks test_python-rpn.ipynb --kernels python-rpn-39 || exit 1; \
+   conda clean -y --all; \
    fi
 
 RUN git clone --recursive https://github.com/sebastiendfortier/python-rpn.git
