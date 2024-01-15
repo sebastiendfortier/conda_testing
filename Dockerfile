@@ -83,7 +83,7 @@ RUN mamba create -q -y -n python-rpn-tester python=3.9 pytz numpy scipy fortiers
 RUN . activate python-rpn-tester && \
     cd python-rpn && \
     python -m pip install . && \
-    python test_python-rpn.py || exit 1
+    python ../test_python-rpn.py || exit 1
 
 ################################################################
 
@@ -131,7 +131,7 @@ RUN mamba create -q -y -n domcmc-tester python=3.9 fortiers::eccc_rpnpy
 RUN . activate domcmc-tester && \
     cd domcmc && \
     python -m pip install . && \
-    python test_domcmc.py || exit 1
+    python ../test_domcmc.py || exit 1
 
 ################################################################
 RUN conda clean -y --all
@@ -178,7 +178,7 @@ RUN mamba create -q -y -n fstd2nc-tester python=3.9 fortiers::eccc_rpnpy
 RUN . activate fstd2nc-tester && \
     cd fstd2nc && \
     python -m pip install . && \
-    python test_fstd2nc.py || exit 1 && \
+    python ../test_fstd2nc.py || exit 1 && \
     fstd2nc --version || exit 1
 
 ################################################################
@@ -226,7 +226,7 @@ RUN mamba create -q -y -n fstpy-tester python=3.9 fortiers::eccc_rpnpy
 RUN . activate fstpy-tester && \
     cd fstpy && \
     python -m pip install . && \
-    python test_fstpy.py || exit 1
+    python ../test_fstpy.py || exit 1
 
 ################################################################
 RUN conda clean -y --all
@@ -273,7 +273,7 @@ RUN mamba create -q -y -n ci_fstcomp-tester python=3.9 fortiers::eccc_rpnpy
 RUN . activate ci_fstcomp-tester && \
     cd ci_fstcomp && \
     python -m pip install . && \
-    python test_ci_fstcomp.py || exit 1
+    python ../test_ci_fstcomp.py || exit 1
 
 ################################################################
 RUN conda clean -y --all
@@ -320,7 +320,13 @@ RUN mamba create -q -y -n spookipy-tester python=3.9 fortiers::eccc_rpnpy
 RUN . activate spookipy-tester && \
     cd spookipy && \
     python -m pip install . && \
-    python test_spookipy.py || exit 1
+    python ../test_spookipy.py || exit 1
 
 ################################################################
+
+WORKDIR /home/${UNAME}
+
 COPY control.ipynb .
+
+RUN . activate tester && \
+    python kernel_tester.py --notebooks control.ipynb --kernels domcmc-39 || exit 1 ;
