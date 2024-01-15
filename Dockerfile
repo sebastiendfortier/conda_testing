@@ -23,6 +23,7 @@ USER $UNAME
 WORKDIR /home/${UNAME}
 
 COPY 2007021900.brp .
+COPY 2007021900.brp .
 COPY kernel_tester.py .
 COPY test_ci_fstcomp.ipynb .
 COPY test_ci_fstcomp.py .
@@ -36,6 +37,8 @@ COPY test_python-rpn.ipynb .
 COPY test_python-rpn.py .
 COPY test_spookipy.ipynb .
 COPY test_spookipy.py .
+COPY control.ipynb .
+COPY test_control.sh .
 
 ################################################################
 
@@ -344,5 +347,4 @@ RUN . activate spookipy-tester && \
 
 WORKDIR /home/${UNAME}
 
-COPY control.ipynb .
-COPY test_control.sh .
+
