@@ -70,7 +70,7 @@ RUN if [ "$ARCH" != "ppc64le" ]; then \
    . activate tester; \
    python kernel_tester.py --notebooks test_python-rpn.ipynb --kernels python-rpn-39 python-rpn-310 python-rpn-311 || exit 1; \
    conda clean -y --all; \
-   else; \
+   else \
    . activate tester; \
    python kernel_tester.py --notebooks test_python-rpn.ipynb --kernels python-rpn-39 || exit 1; \
    conda clean -y --all; \
