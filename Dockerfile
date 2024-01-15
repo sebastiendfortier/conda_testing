@@ -345,6 +345,4 @@ RUN . activate spookipy-tester && \
 WORKDIR /home/${UNAME}
 
 COPY control.ipynb .
-
-RUN . activate tester && \
-    python kernel_tester.py --notebooks control.ipynb --kernels domcmc-39 || exit 1 ;
+COPY test_control.sh .
