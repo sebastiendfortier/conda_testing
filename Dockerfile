@@ -79,6 +79,8 @@ RUN if [ "$ARCH" != "ppc64le" ]; then \
    conda clean -y --all; \
    fi
 
+RUN rm -rf /home/${UNAME}/.conda/envs/python-rpn-39 /home/${UNAME}/.conda/envs/python-rpn-310 /home/${UNAME}/.conda/envs/python-rpn-311
+
 WORKDIR /home/${UNAME}
 
 RUN git clone --recursive https://github.com/sebastiendfortier/python-rpn.git
@@ -90,6 +92,8 @@ RUN . activate python-rpn-tester && \
     python -m pip install . && \
     cd /home/${UNAME} && \
     python test_python-rpn.py || exit 1
+
+RUN rm -rf /home/${UNAME}/.conda/envs/python-rpn-tester
 
 ################################################################
 
@@ -130,6 +134,8 @@ RUN if [ "$ARCH" != "ppc64le" ]; then \
    conda clean -y --all; \
    fi
 
+RUN rm -rf /home/${UNAME}/.conda/envs/domcmc-39 /home/${UNAME}/.conda/envs/domcmc-310 /home/${UNAME}/.conda/envs/domcmc-311   
+
 WORKDIR /home/${UNAME}
 
 RUN git clone --recursive https://github.com/sebastiendfortier/domcmc.git
@@ -141,6 +147,8 @@ RUN . activate domcmc-tester && \
     python -m pip install . && \
     cd /home/${UNAME} && \
     python test_domcmc.py || exit 1
+
+RUN rm -rf /home/${UNAME}/.conda/envs/domcmc-tester
 
 ################################################################
 RUN conda clean -y --all
@@ -180,6 +188,8 @@ RUN if [ "$ARCH" != "ppc64le" ]; then \
    conda clean -y --all; \
    fi
 
+RUN rm -rf /home/${UNAME}/.conda/envs/fstd2nc-39 /home/${UNAME}/.conda/envs/fstd2nc-310 /home/${UNAME}/.conda/envs/fstd2nc-311   
+
 WORKDIR /home/${UNAME}
 
 RUN git clone --recursive https://github.com/neishm/fstd2nc.git
@@ -188,11 +198,13 @@ RUN mamba create -q -y -n fstd2nc-tester python=3.9 fortiers::eccc_rpnpy
 
 RUN . activate fstd2nc-tester && \
     cd fstd2nc && \
-    sed -i "s/,'fstd2nc-deps >= 0.20200304.0'//g" fstd2nc/setup.py && \
+    sed -i "s/,'fstd2nc-deps >= 0.20200304.0'//g" setup.py && \
     python -m pip install . && \
     cd /home/${UNAME} && \
     python test_fstd2nc.py || exit 1 && \
     fstd2nc --version || exit 1
+
+RUN rm -rf /home/${UNAME}/.conda/envs/fstd2nc-tester
 
 ################################################################
 RUN conda clean -y --all
@@ -232,6 +244,8 @@ RUN if [ "$ARCH" != "ppc64le" ]; then \
    conda clean -y --all; \
    fi
 
+RUN rm -rf /home/${UNAME}/.conda/envs/fstpy-39 /home/${UNAME}/.conda/envs/fstpy-310 /home/${UNAME}/.conda/envs/fstpy-311 
+
 WORKDIR /home/${UNAME}
 
 RUN git clone --recursive https://github.com/sebastiendfortier/fstpy.git
@@ -240,10 +254,12 @@ RUN mamba create -q -y -n fstpy-tester python=3.9 fortiers::eccc_rpnpy
 
 RUN . activate fstpy-tester && \
     cd fstpy && \
-    sed -i "s/,'fstd2nc-deps >= 0.20200304.0'//g" fstpy/setup.py && \
+    sed -i "s/,'fstd2nc-deps >= 0.20200304.0'//g" setup.py && \
     python -m pip install . && \
     cd /home/${UNAME} && \
     python test_fstpy.py || exit 1
+
+RUN rm -rf /home/${UNAME}/.conda/envs/fstpy-tester    
 
 ################################################################
 RUN conda clean -y --all
@@ -283,6 +299,8 @@ RUN if [ "$ARCH" != "ppc64le" ]; then \
    conda clean -y --all; \
    fi
 
+RUN rm -rf /home/${UNAME}/.conda/envs/ci_fstcomp-39 /home/${UNAME}/.conda/envs/ci_fstcomp-310 /home/${UNAME}/.conda/envs/ci_fstcomp-311 
+
 WORKDIR /home/${UNAME}
 
 RUN git clone --recursive https://github.com/sebastiendfortier/ci_fstcomp.git
@@ -294,6 +312,8 @@ RUN . activate ci_fstcomp-tester && \
     python -m pip install . && \
     cd /home/${UNAME} && \
     python test_ci_fstcomp.py || exit 1
+
+RUN rm -rf /home/${UNAME}/.conda/envs/ci_fstcomp-tester
 
 ################################################################
 RUN conda clean -y --all
@@ -333,6 +353,8 @@ RUN if [ "$ARCH" != "ppc64le" ]; then \
    conda clean -y --all; \
    fi
 
+RUN rm -rf /home/${UNAME}/.conda/envs/spookipy-39 /home/${UNAME}/.conda/envs/spookipy-310 /home/${UNAME}/.conda/envs/spookipy-311 
+
 WORKDIR /home/${UNAME}
 
 RUN git clone --recursive https://github.com/sebastiendfortier/spookipy.git
@@ -344,6 +366,8 @@ RUN . activate spookipy-tester && \
     python -m pip install . && \
     cd /home/${UNAME} && \
     python test_spookipy.py || exit 1
+
+RUN rm -rf /home/${UNAME}/.conda/envs/spookipy-tester    
 
 ################################################################
 
