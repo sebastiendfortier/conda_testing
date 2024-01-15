@@ -12,7 +12,7 @@ SHELL ["/bin/bash", "-c"]
 COPY 02nocache /etc/apt/apt.conf.d/02nocache
 COPY 01_nodoc /etc/dpkg/dpkg.cfg.d/01_nodoc
 
-COPY table_b_bufr_e /share/.
+COPY table_b_bufr_e /share/table_b_bufr_e
 # RUN apt-get update -y && \
 #     apt-get install -y git nano
 
