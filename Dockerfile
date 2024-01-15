@@ -188,6 +188,7 @@ RUN mamba create -q -y -n fstd2nc-tester python=3.9 fortiers::eccc_rpnpy
 
 RUN . activate fstd2nc-tester && \
     cd fstd2nc && \
+    sed -i "s/,'fstd2nc-deps >= 0.20200304.0'//g" fstd2nc/setup.py && \
     python -m pip install . && \
     cd /home/${UNAME} && \
     python test_fstd2nc.py || exit 1 && \
@@ -239,6 +240,7 @@ RUN mamba create -q -y -n fstpy-tester python=3.9 fortiers::eccc_rpnpy
 
 RUN . activate fstpy-tester && \
     cd fstpy && \
+    sed -i "s/,'fstd2nc-deps >= 0.20200304.0'//g" fstpy/setup.py && \
     python -m pip install . && \
     cd /home/${UNAME} && \
     python test_fstpy.py || exit 1
