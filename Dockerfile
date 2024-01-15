@@ -44,7 +44,6 @@ RUN . activate python-rpn-39 && python -m ipykernel install --user --name python
 
 RUN . activate python-rpn-39 && python test_python-rpn.py || exit 1
 
-
 RUN conda clean -y --all
 
 RUN if [ "$ARCH" != "ppc64le" ]; then \
@@ -97,22 +96,32 @@ RUN . activate domcmc-39 && python test_domcmc.py || exit 1
 
 RUN conda clean -y --all
 
-RUN mamba create -q -y -n domcmc-310 python=3.10 fortiers::domcmc ipykernel jupyter
+RUN if [ "$ARCH" != "ppc64le" ]; then \
+   echo "Running commands for $ARCH"; \
+   mamba create -q -y -n domcmc-310 python=3.10 fortiers::domcmc ipykernel jupyter; \ 
+   . activate domcmc-310 && python -m ipykernel install --user --name domcmc-310 --display-name="domcmc-310"; \
+   . activate domcmc-310 && python test_domcmc.py || exit 1; \
+   conda clean -y --all; \
+   fi
 
-RUN . activate domcmc-310 && python -m ipykernel install --user --name domcmc-310 --display-name="domcmc-310"
+RUN if [ "$ARCH" != "ppc64le" ]; then \
+   echo "Running commands for $ARCH"; \
+   mamba create -q -y -n domcmc-311 python=3.11 fortiers::domcmc ipykernel jupyter; \ 
+   . activate domcmc-311 && python -m ipykernel install --user --name domcmc-311 --display-name="domcmc-311"; \ 
+   . activate domcmc-311 && python test_domcmc.py || exit 1; \ 
+   conda clean -y --all; \
+   fi
 
-RUN . activate domcmc-310 && python test_domcmc.py || exit 1
-
-RUN conda clean -y --all
-
-RUN mamba create -q -y -n domcmc-311 python=3.11 fortiers::domcmc ipykernel jupyter
-
-RUN . activate domcmc-311 && python -m ipykernel install --user --name domcmc-311 --display-name="domcmc-311"
-
-RUN . activate domcmc-311 && python test_domcmc.py || exit 1
-
-RUN . activate tester && \
-    python kernel_tester.py --notebooks test_domcmc.ipynb --kernels domcmc-39 domcmc-310 domcmc-311 || exit 1 
+RUN if [ "$ARCH" != "ppc64le" ]; then \
+   echo "Running commands for $ARCH"; \
+   . activate tester; \
+   python kernel_tester.py --notebooks test_domcmc.ipynb --kernels domcmc-39 domcmc-310 domcmc-311 || exit 1; \
+   conda clean -y --all; \
+   else \
+   . activate tester; \
+   python kernel_tester.py --notebooks test_domcmc.ipynb --kernels domcmc-39 || exit 1; \
+   conda clean -y --all; \
+   fi
 
 RUN git clone --recursive https://github.com/sebastiendfortier/domcmc.git
 
@@ -134,22 +143,32 @@ RUN . activate fstd2nc-39 && python test_fstd2nc.py || exit 1
 
 RUN conda clean -y --all
 
-RUN mamba create -q -y -n fstd2nc-310 python=3.10 fortiers::fstd2nc ipykernel jupyter
+RUN if [ "$ARCH" != "ppc64le" ]; then \
+   echo "Running commands for $ARCH"; \
+   mamba create -q -y -n fstd2nc-310 python=3.10 fortiers::fstd2nc ipykernel jupyter; \ 
+   . activate fstd2nc-310 && python -m ipykernel install --user --name fstd2nc-310 --display-name="fstd2nc-310"; \
+   . activate fstd2nc-310 && python test_fstd2nc.py || exit 1; \
+   conda clean -y --all; \
+   fi
 
-RUN . activate fstd2nc-310 && python -m ipykernel install --user --name fstd2nc-310 --display-name="fstd2nc-310"
+RUN if [ "$ARCH" != "ppc64le" ]; then \
+   echo "Running commands for $ARCH"; \
+   mamba create -q -y -n fstd2nc-311 python=3.11 fortiers::fstd2nc ipykernel jupyter; \ 
+   . activate fstd2nc-311 && python -m ipykernel install --user --name fstd2nc-311 --display-name="fstd2nc-311"; \ 
+   . activate fstd2nc-311 && python test_fstd2nc.py || exit 1; \ 
+   conda clean -y --all; \
+   fi
 
-RUN . activate fstd2nc-310 && python test_fstd2nc.py || exit 1
-
-RUN conda clean -y --all
-
-RUN mamba create -q -y -n fstd2nc-311 python=3.11 fortiers::fstd2nc ipykernel jupyter
-
-RUN . activate fstd2nc-311 && python -m ipykernel install --user --name fstd2nc-311 --display-name="fstd2nc-311"
-
-RUN . activate fstd2nc-311 && python test_fstd2nc.py || exit 1
-
-RUN . activate tester && \
-    python kernel_tester.py --notebooks test_fstd2nc.ipynb --kernels fstd2nc-39 fstd2nc-310 fstd2nc-311 || exit 1 
+RUN if [ "$ARCH" != "ppc64le" ]; then \
+   echo "Running commands for $ARCH"; \
+   . activate tester; \
+   python kernel_tester.py --notebooks test_fstd2nc.ipynb --kernels fstd2nc-39 fstd2nc-310 fstd2nc-311 || exit 1; \
+   conda clean -y --all; \
+   else \
+   . activate tester; \
+   python kernel_tester.py --notebooks test_fstd2nc.ipynb --kernels fstd2nc-39 || exit 1; \
+   conda clean -y --all; \
+   fi
 
 RUN git clone --recursive https://github.com/neishm/fstd2nc.git
 
@@ -172,22 +191,32 @@ RUN . activate fstpy-39 && python test_fstpy.py || exit 1
 
 RUN conda clean -y --all
 
-RUN mamba create -q -y -n fstpy-310 python=3.10 fortiers::fstpy ipykernel jupyter
+RUN if [ "$ARCH" != "ppc64le" ]; then \
+   echo "Running commands for $ARCH"; \
+   mamba create -q -y -n fstpy-310 python=3.10 fortiers::fstpy ipykernel jupyter; \ 
+   . activate fstpy-310 && python -m ipykernel install --user --name fstpy-310 --display-name="fstpy-310"; \
+   . activate fstpy-310 && python test_fstpy.py || exit 1; \
+   conda clean -y --all; \
+   fi
 
-RUN . activate fstpy-310 && python -m ipykernel install --user --name fstpy-310 --display-name="fstpy-310"
+RUN if [ "$ARCH" != "ppc64le" ]; then \
+   echo "Running commands for $ARCH"; \
+   mamba create -q -y -n fstpy-311 python=3.11 fortiers::fstpy ipykernel jupyter; \ 
+   . activate fstpy-311 && python -m ipykernel install --user --name fstpy-311 --display-name="fstpy-311"; \ 
+   . activate fstpy-311 && python test_fstpy.py || exit 1; \ 
+   conda clean -y --all; \
+   fi
 
-RUN . activate fstpy-310 && python test_fstpy.py || exit 1
-
-RUN conda clean -y --all
-
-RUN mamba create -q -y -n fstpy-311 python=3.11 fortiers::fstpy ipykernel jupyter
-
-RUN . activate fstpy-311 && python -m ipykernel install --user --name fstpy-311 --display-name="fstpy-311"
-
-RUN . activate fstpy-311 && python test_fstpy.py || exit 1
-
-RUN . activate tester && \
-    python kernel_tester.py --notebooks test_fstpy.ipynb --kernels fstpy-39 fstpy-310 fstpy-311 || exit 1 
+RUN if [ "$ARCH" != "ppc64le" ]; then \
+   echo "Running commands for $ARCH"; \
+   . activate tester; \
+   python kernel_tester.py --notebooks test_fstpy.ipynb --kernels fstpy-39 fstpy-310 fstpy-311 || exit 1 ; \
+   conda clean -y --all; \
+   else \
+   . activate tester; \
+   python kernel_tester.py --notebooks test_fstpy.ipynb --kernels fstpy-39 || exit 1 ; \
+   conda clean -y --all; \
+   fi
 
 RUN git clone --recursive https://github.com/sebastiendfortier/fstpy.git
 
@@ -209,22 +238,32 @@ RUN . activate ci_fstcomp-39 && python test_ci_fstcomp.py || exit 1
 
 RUN conda clean -y --all
 
-RUN mamba create -q -y -n ci_fstcomp-310 python=3.10 fortiers::ci_fstcomp ipykernel jupyter
+RUN if [ "$ARCH" != "ppc64le" ]; then \
+   echo "Running commands for $ARCH"; \
+   mamba create -q -y -n ci_fstcomp-310 python=3.10 fortiers::ci_fstcomp ipykernel jupyter; \ 
+   . activate ci_fstcomp-310 && python -m ipykernel install --user --name ci_fstcomp-310 --display-name="ci_fstcomp-310"; \
+   . activate ci_fstcomp-310 && python test_ci_fstcomp.py || exit 1; \
+   conda clean -y --all; \
+   fi
 
-RUN . activate ci_fstcomp-310 && python -m ipykernel install --user --name ci_fstcomp-310 --display-name="ci_fstcomp-310"
+RUN if [ "$ARCH" != "ppc64le" ]; then \
+   echo "Running commands for $ARCH"; \
+   mamba create -q -y -n ci_fstcomp-311 python=3.11 fortiers::ci_fstcomp ipykernel jupyter; \ 
+   . activate ci_fstcomp-311 && python -m ipykernel install --user --name ci_fstcomp-311 --display-name="ci_fstcomp-311"; \ 
+   . activate ci_fstcomp-311 && python test_ci_fstcomp.py || exit 1; \ 
+   conda clean -y --all; \
+   fi
 
-RUN . activate ci_fstcomp-310 && python test_ci_fstcomp.py || exit 1
-
-RUN conda clean -y --all
-
-RUN mamba create -q -y -n ci_fstcomp-311 python=3.11 fortiers::ci_fstcomp ipykernel jupyter
-
-RUN . activate ci_fstcomp-311 && python -m ipykernel install --user --name ci_fstcomp-311 --display-name="ci_fstcomp-311"
-
-RUN . activate ci_fstcomp-311 && python test_ci_fstcomp.py || exit 1
-
-RUN . activate tester && \
-    python kernel_tester.py --notebooks test_ci_fstcomp.ipynb --kernels ci_fstcomp-39 ci_fstcomp-310 ci_fstcomp-311 || exit 1 
+RUN if [ "$ARCH" != "ppc64le" ]; then \
+   echo "Running commands for $ARCH"; \
+   . activate tester; \
+   python kernel_tester.py --notebooks test_ci_fstcomp.ipynb --kernels ci_fstcomp-39 ci_fstcomp-310 ci_fstcomp-311 || exit 1 ; \
+   conda clean -y --all; \
+   else \
+   . activate tester; \
+   python kernel_tester.py --notebooks test_ci_fstcomp.ipynb --kernels ci_fstcomp-39 || exit 1 ; \
+   conda clean -y --all; \
+   fi
 
 RUN git clone --recursive https://github.com/sebastiendfortier/ci_fstcomp.git
 
@@ -246,22 +285,32 @@ RUN . activate spookipy-39 && python test_spookipy.py || exit 1
 
 RUN conda clean -y --all
 
-RUN mamba create -q -y -n spookipy-310 python=3.10 fortiers::spookipy ipykernel jupyter
+RUN if [ "$ARCH" != "ppc64le" ]; then \
+   echo "Running commands for $ARCH"; \
+   mamba create -q -y -n spookipy-310 python=3.10 fortiers::spookipy ipykernel jupyter; \ 
+   . activate spookipy-310 && python -m ipykernel install --user --name spookipy-310 --display-name="spookipy-310"; \
+   . activate spookipy-310 && python test_spookipy.py || exit 1; \
+   conda clean -y --all; \
+   fi
 
-RUN . activate spookipy-310 && python -m ipykernel install --user --name spookipy-310 --display-name="spookipy-310"
+RUN if [ "$ARCH" != "ppc64le" ]; then \
+   echo "Running commands for $ARCH"; \
+   mamba create -q -y -n spookipy-311 python=3.11 fortiers::spookipy ipykernel jupyter; \ 
+   . activate spookipy-311 && python -m ipykernel install --user --name spookipy-311 --display-name="spookipy-311"; \ 
+   . activate spookipy-311 && python test_spookipy.py || exit 1; \ 
+   conda clean -y --all; \
+   fi
 
-RUN . activate spookipy-310 && python test_spookipy.py || exit 1
-
-RUN conda clean -y --all
-
-RUN mamba create -q -y -n spookipy-311 python=3.11 fortiers::spookipy ipykernel jupyter
-
-RUN . activate spookipy-311 && python -m ipykernel install --user --name spookipy-311 --display-name="spookipy-311"
-
-RUN . activate spookipy-311 && python test_spookipy.py || exit 1
-
-RUN . activate tester && \
-    python kernel_tester.py --notebooks test_spookipy.ipynb --kernels spookipy-39 spookipy-310 spookipy-311 || exit 1 
+RUN if [ "$ARCH" != "ppc64le" ]; then \
+   echo "Running commands for $ARCH"; \
+   . activate tester; \
+   python kernel_tester.py --notebooks test_spookipy.ipynb --kernels spookipy-39 spookipy-310 spookipy-311 || exit 1 ; \
+   conda clean -y --all; \
+   else \
+   . activate tester; \
+   python kernel_tester.py --notebooks test_spookipy.ipynb --kernels spookipy-39 || exit 1 ; \
+   conda clean -y --all; \
+   fi
 
 RUN git clone --recursive https://github.com/sebastiendfortier/spookipy.git
 
