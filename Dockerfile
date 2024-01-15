@@ -23,7 +23,7 @@ USER $UNAME
 WORKDIR /home/${UNAME}
 
 COPY 2007021900.brp .
-COPY 2007021900.brp .
+COPY test_file.std .
 COPY kernel_tester.py .
 COPY test_ci_fstcomp.ipynb .
 COPY test_ci_fstcomp.py .
