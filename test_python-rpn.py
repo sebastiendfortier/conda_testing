@@ -11,8 +11,20 @@ import rpnpy.vgd.all as vgd
 print (rmn.RMN_VERSION)
 print (rmn.RMN_LIBPATH)
 
-(yyyymmdd, hhmmsshh) = (20150123, 0)
+print('--- file test ---')
+
+# Open existing file in Rear Only mode
+funit = rmn.fstopenall('test_file.std', rmn.FST_RO)
+
+# Find the record named P0 and read its metadata
+key    = rmn.fstinf(funit, nomvar='TT')
+ttmeta = rmn.fstprm(key['key'])
+print(ttmeta)
+
+rmn.fstcloseall(funit)
+
 print('--- newdate test ---')
+(yyyymmdd, hhmmsshh) = (20150123, 0)
 print(yyyymmdd, hhmmsshh)
 try:
     idate1 = rmn.newdate(rmn.NEWDATE_PRINT2STAMP, yyyymmdd, hhmmsshh)

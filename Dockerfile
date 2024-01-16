@@ -40,7 +40,16 @@ COPY test_spookipy.py .
 COPY control.ipynb .
 COPY test_control.sh .
 
+USER root
+
+RUN chmod 755 test_* control* kernel_tester* 2007021900
+RUN chown $UNAME:$GNAME test_* control* kernel_tester* 2007021900
+
+USER $UNAME
+
 ################################################################
+
+RUN mamba create -q -y -n tester python=3.9 nbformat nbconvert jupyter
 
 RUN mamba create -q -y -n python-rpn-39 python=3.9 fortiers::eccc_rpnpy ipykernel jupyter
 
@@ -66,7 +75,7 @@ RUN if [ "$ARCH" != "ppc64le" ]; then \
    conda clean -y --all; \
    fi
 
-RUN mamba create -q -y -n tester python=3.9 nbformat nbconvert jupyter
+
 
 RUN if [ "$ARCH" != "ppc64le" ]; then \
    echo "Running commands for $ARCH"; \
@@ -363,7 +372,6 @@ RUN mamba create -q -y -n spookipy-tester python=3.9 fortiers::fstpy
 
 RUN . activate spookipy-tester && \
     cd spookipy && \
-   #  sed -i "s/, 'fstpy>=2023.11.0'//g" setup.py && \
     python -m pip install . && \
     cd /home/${UNAME} && \
     python test_spookipy.py || exit 1
