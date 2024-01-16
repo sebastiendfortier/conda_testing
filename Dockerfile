@@ -47,6 +47,7 @@ RUN chown $UNAME:$GNAME test_* control* kernel_tester* 2007021900*
 
 USER $UNAME
 
+ENV TMPDIR=/tmp
 ################################################################
 
 RUN mamba create -q -y -n tester python=3.9 nbformat nbconvert jupyter
