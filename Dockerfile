@@ -363,6 +363,7 @@ RUN mamba create -q -y -n spookipy-tester python=3.9 fortiers::eccc_rpnpy
 
 RUN . activate spookipy-tester && \
     cd spookipy && \
+    sed -i "s/, 'fstpy>=2023.11.0'//g" setup.py && \
     python -m pip install . && \
     cd /home/${UNAME} && \
     python test_spookipy.py || exit 1
