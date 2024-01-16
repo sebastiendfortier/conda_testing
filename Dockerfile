@@ -359,7 +359,7 @@ WORKDIR /home/${UNAME}
 
 RUN git clone --recursive https://github.com/sebastiendfortier/spookipy.git
 
-RUN mamba create -q -y -n spookipy-tester python=3.9 fortiers::eccc_fstpy
+RUN mamba create -q -y -n spookipy-tester python=3.9 fortiers::fstpy
 
 RUN . activate spookipy-tester && \
     cd spookipy && \
