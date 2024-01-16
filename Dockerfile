@@ -42,8 +42,8 @@ COPY test_control.sh .
 
 USER root
 
-RUN chmod 755 test_* control* kernel_tester* 2007021900
-RUN chown $UNAME:$GNAME test_* control* kernel_tester* 2007021900
+RUN chmod 755 test_* control* kernel_tester* 2007021900*
+RUN chown $UNAME:$GNAME test_* control* kernel_tester* 2007021900*
 
 USER $UNAME
 
