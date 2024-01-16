@@ -194,7 +194,7 @@ WORKDIR /home/${UNAME}
 
 RUN git clone --recursive https://github.com/neishm/fstd2nc.git
 
-RUN mamba create -q -y -n fstd2nc-tester python=3.9 netcdf4 fortiers::eccc_rpnpy
+RUN mamba create -q -y -n fstd2nc-tester python=3.9 netcdf4 hdf5 fortiers::eccc_rpnpy
 
 RUN . activate fstd2nc-tester && \
     cd fstd2nc && \
