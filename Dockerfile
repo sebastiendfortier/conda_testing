@@ -258,7 +258,7 @@ RUN rm -rf /home/${UNAME}/.conda/envs/fstpy-39 /home/${UNAME}/.conda/envs/fstpy-
 
 WORKDIR /home/${UNAME}
 
-RUN git clone --recursive https://github.com/sebastiendfortier/fstpy.git
+RUN git clone --recursive https://github.com/sebastiendfortier/fstpy.git && sleep 2
 
 RUN mamba create -q -y -n fstpy-tester python=3.9 fortiers::eccc_rpnpy
 
